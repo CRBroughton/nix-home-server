@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    podman-flake = {
+     url = "github:CRBroughton/nix-flakes?dir=podman";
+     inputs.nixpkgs.follows = "nixpkgs";   
+    };
     
     fish-flake = {
       url = "github:CRBroughton/nix-flakes?dir=fish-shell";
@@ -15,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, fish-flake, ... }: {
+  outputs = { self, nixpkgs, home-manager, fish-flake, podman-flake, ... }: {
     nixosConfigurations.nixos-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -27,7 +32,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.craig = import ./home.nix;
-          home-manager.extraSpecialArgs = { inherit fish-flake; };
+          home-manager.extraSpecialArgs = { inherit fish-flake podman-flake; };
         }
       ];
     };

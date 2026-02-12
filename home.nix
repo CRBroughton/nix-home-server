@@ -1,4 +1,4 @@
-{ config, pkgs, fish-flake, ... }:
+{ config, pkgs, fish-flake, podman-flake, ... }:
 
 {
   imports = [
@@ -9,5 +9,5 @@
 
 
   programs.fish-shell.enable = true;
-
+  programs.podman-config.enable = true;
 }

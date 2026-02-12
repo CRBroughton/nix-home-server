@@ -89,17 +89,17 @@
   networking.hostName = "nixos-server";
 
 
-  virtualisation.podman = {
-   enable = true;
-   dockerCompat = true;
-   defaultNetwork.settings.dns_enabled = true;
+ #virtualisation.podman = {
+   #enable = true;
+   #dockerCompat = true;
+   #defaultNetwork.settings.dns_enabled = true;
    #dockerSocket.enable = true;
-   autoPrune.enable = true;
-  };
+   #autoPrune.enable = true;
+  #};
 
-  systemd.tmpfiles.rules = [
-   "L+ /var/run/docker.sock - - - - /run/podman/podman.sock"
-  ];
+  #systemd.tmpfiles.rules = [
+   #"L+ /var/run/docker.sock - - - - /run/podman/podman.sock"
+  #];
 
 
 
@@ -135,6 +135,7 @@
     podman-compose
     lazydocker
     lazygit
+    just
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
