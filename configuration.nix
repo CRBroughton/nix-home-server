@@ -17,6 +17,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./services/ergo.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -119,6 +120,7 @@
   #   wget
     git
     openssh
+    openssl
     podman-compose
     lazydocker
     lazygit
