@@ -10,7 +10,7 @@
     };
 
     podman-flake = {
-     url = "github:CRBroughton/nix-flakes?dir=podman";
+     url = "github:CRBroughton/nix-flakes?dir=podman-flake";
      inputs.nixpkgs.follows = "nixpkgs";   
     };
     
@@ -31,8 +31,13 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.craig = import ./home.nix;
-          home-manager.extraSpecialArgs = { inherit fish-flake podman-flake; };
+          home-manager.users.craig = {
+           imports = [
+            fish-flake.homeManagerModules.default
+            podman-flake.homeManagerModules.default
+            ./home.nix
+           ];
+          };
         }
       ];
     };

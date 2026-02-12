@@ -78,6 +78,8 @@
 
   programs.fish.enable = true;
   users.users.craig = {
+    subUidRanges = [{ startUid = 100000; count = 65536; }];
+    subGidRanges = [{ startGid = 100000; count = 65536; }];
    isNormalUser = true;
    extraGroups = [ "wheel" "networkmanager" "podman" ];
    shell = pkgs.fish;
@@ -87,21 +89,6 @@
   };
   security.sudo.wheelNeedsPassword = false;
   networking.hostName = "nixos-server";
-
-
- #virtualisation.podman = {
-   #enable = true;
-   #dockerCompat = true;
-   #defaultNetwork.settings.dns_enabled = true;
-   #dockerSocket.enable = true;
-   #autoPrune.enable = true;
-  #};
-
-  #systemd.tmpfiles.rules = [
-   #"L+ /var/run/docker.sock - - - - /run/podman/podman.sock"
-  #];
-
-
 
   programs.git = {
    enable = true;
