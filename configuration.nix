@@ -77,13 +77,28 @@
   # };
   users.users.craig = {
    isNormalUser = true;
-   extraGroups = [ "wheel" "networkmanager" ];
+   extraGroups = [ "wheel" "networkmanager" "podman" ];
    openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrDtLXrygEh0uessk5PifLw+t6SDKJz08w6u9iQxMpo crbroughton@posteo.uk"
    ];
   };
   security.sudo.wheelNeedsPassword = false;
   networking.hostName = "nixos-server";
+
+
+  virtualisation.podman = {
+   enable = true;
+   dockerCompat = true;
+   defaultNetwork.settings.dns_enabled = true;
+   #dockerSocket.enable = true;
+   autoPrune.enable = true;
+  };
+
+  systemd.tmpfiles.rules = [
+   "L+ /var/run/docker.sock - - - - /run/podman/podman.sock"
+  ];
+
+
 
   programs.git = {
    enable = true;
@@ -114,6 +129,9 @@
   #   wget
     git
     openssh
+    podman-compose
+    lazydocker
+    lazygit
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
