@@ -1,0 +1,71 @@
+{
+  "nodes": {
+    "fish-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "fish-shell",
+        "lastModified": 1767194017,
+        "narHash": "sha256-xkJ8FlUeF7b/0hlPRQ2ObZo/6QbwHLoc23uzhJFXYsk=",
+        "owner": "CRBroughton",
+        "repo": "nix-flakes",
+        "rev": "430e3d922f40bb8b560ebb33778e2cbe49ed8a15",
+        "type": "github"
+      },
+      "original": {
+        "dir": "fish-shell",
+        "owner": "CRBroughton",
+        "repo": "nix-flakes",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770915843,
+        "narHash": "sha256-ZwU5wXKNqpOQvjNz6aBp1j5peiBZow1++6pLnk5VAhs=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "6a1f7101d2c3ee87d485a87880d73b4665c6a4bd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1770562336,
+        "narHash": "sha256-ub1gpAONMFsT/GU2hV6ZWJjur8rJ6kKxdm9IlCT0j84=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "fish-flake": "fish-flake",
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

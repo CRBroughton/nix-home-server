@@ -75,6 +75,8 @@
   #     tree
   #   ];
   # };
+
+  programs.fish.enable = true;
   users.users.craig = {
    isNormalUser = true;
    extraGroups = [ "wheel" "networkmanager" "podman" ];
