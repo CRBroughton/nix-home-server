@@ -2,23 +2,18 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
-
-
-
-
-
-
-
-
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./services/ergo.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -46,9 +41,6 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -79,45 +71,66 @@
 
   programs.fish.enable = true;
   users.users.craig = {
-    subUidRanges = [{ startUid = 100000; count = 65536; }];
-    subGidRanges = [{ startGid = 100000; count = 65536; }];
-   isNormalUser = true;
-   extraGroups = [ "wheel" "networkmanager" "podman" ];
-   shell = pkgs.fish;
-   openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrDtLXrygEh0uessk5PifLw+t6SDKJz08w6u9iQxMpo crbroughton@posteo.uk"
-   ];
+    subUidRanges = [
+      {
+        startUid = 100000;
+        count = 65536;
+      }
+    ];
+    subGidRanges = [
+      {
+        startGid = 100000;
+        count = 65536;
+      }
+    ];
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "podman"
+    ];
+    shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrDtLXrygEh0uessk5PifLw+t6SDKJz08w6u9iQxMpo crbroughton@posteo.uk"
+    ];
   };
   security.sudo.wheelNeedsPassword = false;
   networking.hostName = "nixos-server";
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22
+      6697
+    ];
+  };
 
   programs.git = {
-   enable = true;
-   config = {
-    user = {
-     name = "CRBroughton";
-     email = "crbroughton@posteo.uk";
+    enable = true;
+    config = {
+      user = {
+        name = "CRBroughton";
+        email = "crbroughton@posteo.uk";
+      };
+      init = {
+        defaultBranch = "master";
+      };
+      gpg = {
+        format = "ssh";
+      };
+      commit.gpgsign = true;
+      "gpg \"ssh\"" = {
+        allowedSignersFile = "~/.ssh/allowed_signers";
+      };
     };
-    init = {
-     defaultBranch = "master";
-    };
-    gpg = {
-     format = "ssh";
-    };
-    commit.gpgsign = true;
-    "gpg \"ssh\"" = {
-     allowedSignersFile = "~/.ssh/allowed_signers";
-    };
-   };
   };
 
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
+  environment.systemPackages = with pkgs; [
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #   wget
     git
     openssh
     openssl
@@ -125,7 +138,8 @@
     lazydocker
     lazygit
     just
-   ];
+    nixfmt
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -139,16 +153,16 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-   enable = true;
-   settings = {
-    PermitRootLogin = "no";
-    PasswordAuthentication = false;
-    KbdInteractiveAuthentication = false;
-    X11Forwarding = false;
-   };
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      X11Forwarding = false;
+    };
   };
 
-# Open ports in the firewall.
+  # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
@@ -179,4 +193,3 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-
