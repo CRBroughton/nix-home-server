@@ -1,0 +1,4 @@
+services/irc/config/ircd.yaml
+services/irc/config/motd.txt
+services/irc/certs
+services/irc/data
