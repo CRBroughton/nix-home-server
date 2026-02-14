@@ -1,0 +1,42 @@
+# AdGuard Home - DNS + Ad Blocking
+# Run with: podman compose up -d
+
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+
+    ports:
+      # DNS
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Admin panel
+      - "8080:80/tcp"
+      # DNS-over-HTTPS (optional)
+      # - "443:443/tcp"
+      # DNS-over-TLS (optional)
+      # - "853:853/tcp"
+
+    volumes:
+      - ./data:/opt/adguardhome/work:Z
+      - ./config:/opt/adguardhome/conf:Z
+
+    # Security
+    security_opt:
+      - no-new-privileges:true
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '1.0'
+        reservations:
+          memory: 64M
+
+    # Logging
+    logging:
+      driver: "journald"
+      options:
+        tag: "adguard"
