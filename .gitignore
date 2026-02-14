@@ -2,3 +2,6 @@ services/irc/config/ircd.yaml
 services/irc/config/motd.txt
 services/irc/certs
 services/irc/data
+services/copyparty/data
+services/adguard/config
+services/adguard/data
