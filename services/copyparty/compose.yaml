@@ -1,0 +1,40 @@
+# Copyparty - File sharing server
+# Run with: podman compose up -d
+
+services:
+  copyparty:
+    image: docker.io/copyparty/ac:latest
+    container_name: copyparty
+    restart: unless-stopped
+
+    ports:
+      - "3923:3923"
+
+    volumes:
+      # Files to share
+      - ./data:/w:Z
+      # Config (optional)
+      # - ./config/copyparty.conf:/cfg/copyparty.conf:ro,Z
+
+    # Default: anonymous read/write to /w
+    # Add accounts with -a user:pass
+    command: ["-v", "/w::rw"]
+
+    # Security
+    security_opt:
+      - no-new-privileges:true
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '2.0'
+        reservations:
+          memory: 64M
+
+    # Logging
+    logging:
+      driver: "journald"
+      options:
+        tag: "copyparty"
