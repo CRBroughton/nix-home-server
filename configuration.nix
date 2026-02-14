@@ -99,10 +99,20 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      22
-      6697
+      22   # IRC
+      53   # Adguard
+      6697 # IRC
+      8080 # Adguard
+      3923 # Copyparty
     ];
+   allowedUDPPorts = [
+      53   # Adguard
+   ];
+   trustedInterfaces = [
+      "tailscale0"
+   ];
   };
+  services.tailscale.enable = true;
 
   programs.git = {
     enable = true;
