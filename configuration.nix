@@ -99,14 +99,16 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      22   # IRC
-      53   # Adguard
-      6697 # IRC
-      8080 # Adguard
-      3923 # Copyparty
+      22    # IRC
+      53    # Adguard
+      6697  # IRC
+      8080  # Adguard
+      3923  # Copyparty
+      64738 # Mumble
     ];
    allowedUDPPorts = [
-      53   # Adguard
+      53    # Adguard
+      64738 # Mumble
    ];
    trustedInterfaces = [
       "tailscale0"

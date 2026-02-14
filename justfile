@@ -28,8 +28,11 @@ format:
 up:
   podman compose -f services/adguard/compose.yaml up -d
   podman compose -f services/copyparty/compose.yaml up -d
+  podman compose -f services/mumble/compose.yaml up -d
+  podman compose -f services/irc/compose.yaml up -d
 
 down:
   podman compose -f services/adguard/compose.yaml down
   podman compose -f services/copyparty/compose.yaml down
-
+  podman compose -f services/mumble/compose.yaml down
+  podman compose -f services/irc/compose.yaml down
