@@ -23,3 +23,13 @@ format:
     fi
     find . -name '*.nix' -type f -exec nixfmt {} +
     echo "✓ Formatted all Nix files"
+
+
+up:
+  podman compose -f services/adguard/compose.yaml up -d
+  podman compose -f services/copyparty/compose.yaml up -d
+
+down:
+  podman compose -f services/adguard/compose.yaml down
+  podman compose -f services/copyparty/compose.yaml down
+
