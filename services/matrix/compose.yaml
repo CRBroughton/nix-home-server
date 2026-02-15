@@ -1,0 +1,45 @@
+# Matrix Synapse Server - Podman Compose Configuration
+# IMPORTANT: Generate config first with: just matrix-generate-config
+# Then start with: podman compose up -d
+
+services:
+  synapse:
+    image: docker.io/matrixdotorg/synapse:latest
+    container_name: synapse
+    restart: unless-stopped
+    ports:
+      # HTTP port for client-server API
+      - "8008:8008"
+      # HTTPS port (optional, configure in homeserver.yaml)
+      # - "8448:8448"
+
+    volumes:
+      # Persistent data (config, media, database)
+      - ./data:/data:Z
+
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '2.0'
+        reservations:
+          memory: 512M
+
+    # Health check
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8008/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+    # Logging
+    logging:
+      driver: "journald"
+      options:
+        tag: "synapse"
