@@ -12,7 +12,7 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       # Admin panel
-      - "8080:80/tcp"
+      - "3000:80/tcp"
       # DNS-over-HTTPS (optional)
       # - "443:443/tcp"
       # DNS-over-TLS (optional)
@@ -40,3 +40,9 @@ services:
       driver: "journald"
       options:
         tag: "adguard"
+
+
+networks:
+  default:
+    external: true
+    name: shared-network
