@@ -13,12 +13,11 @@ services:
     volumes:
       # Files to share
       - ./data:/w:Z
-      # Config (optional)
-      # - ./config/copyparty.conf:/cfg/copyparty.conf:ro,Z
+      # Config file (not in /cfg to avoid auto-discovery conflict)
+      - ./config/copyparty.conf:/etc/copyparty.conf:ro,Z
 
-    # Default: anonymous read/write to /w
-    # Add accounts with -a user:pass
-    command: ["-v", "/w::rw"]
+    # Use config file
+    command: ["-c", "/etc/copyparty.conf"]
 
     # Security
     security_opt:
