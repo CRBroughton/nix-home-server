@@ -15,6 +15,23 @@
     ./hardware-configuration.nix
   ];
 
+  security.wrappers = {
+    newuidmap = {
+      source = "${pkgs.shadow.out}/bin/newuidmap";
+      setuid = true;
+      owner = "root";
+      group = "root";
+    };
+    newgidmap = {
+      source = "${pkgs.shadow.out}/bin/newgidmap";
+      setuid = true;
+      owner = "root";
+      group = "root";
+    };
+  };
+
+
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
