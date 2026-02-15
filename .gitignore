@@ -5,3 +5,7 @@ services/irc/data
 services/copyparty/data
 services/adguard/config
 services/adguard/data
+services/calibre/calibre-library
+services/calibre/config
+services/*/volume
+services/*/data
