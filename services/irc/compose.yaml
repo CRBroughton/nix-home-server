@@ -2,16 +2,29 @@
 # Run with: podman compose up -d
 
 services:
+  tailscale-irc:
+    image: tailscale/tailscale:latest
+    container_name: tailscale-irc
+    hostname: irc
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+    volumes:
+      - ./tailscale:/var/lib/tailscale:Z
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
   ergo:
     image: ghcr.io/ergochat/ergo:stable
     container_name: ergo
     restart: unless-stopped
-
-    ports:
-      # IRC over TLS
-      - "6697:6697"
-      # WebSocket over TLS (for web clients)
-      - "8097:8097"
+    network_mode: service:tailscale-irc
+    depends_on:
+      - tailscale-irc
 
     volumes:
       # Configuration
@@ -55,7 +68,3 @@ services:
       driver: "journald"
       options:
         tag: "ergo-irc"
-
-# Named volumes alternative (uncomment if you prefer named volumes)
-# volumes:
-#   ergo-data:

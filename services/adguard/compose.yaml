@@ -2,21 +2,29 @@
 # Run with: podman compose up -d
 
 services:
+  tailscale-adguard:
+    image: tailscale/tailscale:latest
+    container_name: tailscale-adguard
+    hostname: adguard
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+    volumes:
+      - ./tailscale:/var/lib/tailscale:Z
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
   adguard:
     image: adguard/adguardhome:latest
     container_name: adguard
     restart: unless-stopped
-
-    ports:
-      # DNS
-      - "53:53/tcp"
-      - "53:53/udp"
-      # Admin panel
-      - "3000:80/tcp"
-      # DNS-over-HTTPS (optional)
-      # - "443:443/tcp"
-      # DNS-over-TLS (optional)
-      # - "853:853/tcp"
+    network_mode: service:tailscale-adguard
+    depends_on:
+      - tailscale-adguard
 
     volumes:
       - ./data:/opt/adguardhome/work:Z
@@ -40,9 +48,3 @@ services:
       driver: "journald"
       options:
         tag: "adguard"
-
-
-networks:
-  default:
-    external: true
-    name: shared-network

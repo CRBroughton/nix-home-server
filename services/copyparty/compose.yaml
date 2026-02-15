@@ -2,13 +2,31 @@
 # Run with: podman compose up -d
 
 services:
+  tailscale-copyparty:
+    image: tailscale/tailscale:latest
+    container_name: tailscale-copyparty
+    hostname: copyparty
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_SERVE_CONFIG=/config/serve.json
+    volumes:
+      - ./tailscale:/var/lib/tailscale:Z
+      - ./serve.json:/config/serve.json:ro,Z
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
   copyparty:
     image: docker.io/copyparty/ac:latest
     container_name: copyparty
     restart: unless-stopped
-
-    ports:
-      - "3923:3923"
+    network_mode: service:tailscale-copyparty
+    depends_on:
+      - tailscale-copyparty
 
     volumes:
       # Files to share

@@ -11,56 +11,78 @@ pages:
         widgets:
           - type: docker-containers
             containers:
+              # Tailscale sidecars (hidden)
               glance:
                 hide: true
+              tailscale-glance:
+                hide: true
+              tailscale-cinny:
+                hide: true
+              tailscale-thelounge:
+                hide: true
+              tailscale-freshrss:
+                hide: true
+              tailscale-calibre:
+                hide: true
+              tailscale-copyparty:
+                hide: true
+              tailscale-adguard:
+                hide: true
+              tailscale-mumble:
+                hide: true
+              tailscale-irc:
+                hide: true
+              tailscale-mealie:
+                hide: true
+              tailscale-matrix:
+                hide: true
+              # HTTP services (Tailscale Funnel)
               cinny:
                 name: Cinny
                 description: Chat server (web client)
-                url: http://nixos-server.tail538465.ts.net:8085
+                url: https://cinny.tail538465.ts.net
               thelounge:
                 name: The lounge
                 description: IRC server (web client)
-                url: http://nixos-server.tail538465.ts.net:9000
-              synapse:
-                hide: true
-              synapse-db:
-                hide: true
-              mealie:
-                name: Mealie
-                description: Meal planner (web client)
-                url: http://nixos-server.tail538465.ts.net:9925
+                url: https://thelounge.tail538465.ts.net
               freshrss:
                 name: FreshRSS
                 description: RSS feed (web client)
-                url: http://nixos-server.tail538465.ts.net:8787
+                url: https://freshrss.tail538465.ts.net
               calibre-web-automated:
                 name: Calibre
                 description: Book server (web client)
-                url: http://nixos-server.tail538465.ts.net:8083
+                url: https://calibre.tail538465.ts.net
+              copyparty:
+                name: Copyparty
+                description: File sharing (web client)
+                url: https://copyparty.tail538465.ts.net
+              mealie:
+                name: Mealie
+                description: Meal planner (web client)
+                url: https://mealie.tail538465.ts.net
+              synapse:
+                name: Matrix
+                description: Matrix chat server
+                url: https://matrix.tail538465.ts.net
+              # Hidden services
+              synapse-db:
+                hide: true
               searxng:
                 name: SearXNG
                 description: Local search engine (web client)
                 url: http://nixos-server.tail538465.ts.net:4000
-              murmur:
-                name: Mumble
-                description: Audio chat server
-                url: http://nixos-server.tail538465.ts.net:64738
-                hide: false
+              # Non-HTTP services (MagicDNS only)
               adguard:
                 name: Adguard
                 description: Network ad blocker (web client)
-                url: http://nixos-server.tail538465.ts.net:3000
-                hide: false
-              copyparty:
-                name: Copyparty
-                description: File sharing (web client)
-                url: http://nixos-server.tail538465.ts.net:3923
-                hide: false
+                url: http://adguard.tail538465.ts.net
+              murmur:
+                name: Mumble
+                description: Audio chat server
               ergo:
                 name: IRC
                 description: Local IRC chat server
-                url: http://nixos-server.tail538465.ts.net:6697
-                hide: false
 
   - name: Home
     # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look

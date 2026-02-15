@@ -1,13 +1,30 @@
+# Mumble Voice Server
+# Run with: podman compose up -d
+
 services:
+  tailscale-mumble:
+    image: tailscale/tailscale:latest
+    container_name: tailscale-mumble
+    hostname: mumble
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_STATE_DIR=/var/lib/tailscale
+    volumes:
+      - ./tailscale:/var/lib/tailscale:Z
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
   murmur:
     image: mumblevoip/mumble-server:latest
     container_name: murmur
     restart: unless-stopped
-
-    ports:
-      # Mumble voice (TCP + UDP)
-      - "64738:64738/tcp"
-      - "64738:64738/udp"
+    network_mode: service:tailscale-mumble
+    depends_on:
+      - tailscale-mumble
 
     volumes:
       # Persistent data (database, certificates)
