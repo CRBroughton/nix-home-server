@@ -1,0 +1,33 @@
+# Cinny - Matrix web client
+# Run with: podman compose up -d
+
+services:
+  cinny:
+    image: ghcr.io/cinnyapp/cinny:latest
+    container_name: cinny
+    restart: unless-stopped
+
+    ports:
+      - "8085:80"
+
+    volumes:
+      - ./config.json:/app/config.json:ro,Z
+
+    # Security
+    security_opt:
+      - no-new-privileges:true
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.5'
+        reservations:
+          memory: 32M
+
+    # Logging
+    logging:
+      driver: "journald"
+      options:
+        tag: "cinny"
