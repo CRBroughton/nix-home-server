@@ -1,0 +1,37 @@
+# The Lounge - Web IRC client
+# Run with: podman compose up -d
+
+services:
+  thelounge:
+    image: ghcr.io/thelounge/thelounge:latest
+    container_name: thelounge
+    restart: unless-stopped
+
+    ports:
+      - "9000:9000"
+
+    # Use host network to reach other containers
+    extra_hosts:
+      - "host.containers.internal:host-gateway"
+
+    volumes:
+      - ./data:/var/opt/thelounge:Z
+
+    # Security
+    security_opt:
+      - no-new-privileges:true
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '1.0'
+        reservations:
+          memory: 64M
+
+    # Logging
+    logging:
+      driver: "journald"
+      options:
+        tag: "thelounge"
