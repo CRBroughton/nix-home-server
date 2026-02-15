@@ -187,6 +187,8 @@
     lazygit
     just
     nixfmt
+    btop
+    micro
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
