@@ -141,6 +141,17 @@
   };
   services.tailscale.enable = true;
 
+
+  systemd.services."user-linger-craig" = {
+    description = "Enable lingering for craig";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/loginctl enable-linger craig";
+      RemainAfterExit = true;
+    };
+  };
+
   programs.git = {
     enable = true;
     config = {
