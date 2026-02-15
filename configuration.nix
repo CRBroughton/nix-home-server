@@ -119,7 +119,15 @@
       22    # IRC
       53    # Adguard
       6697  # IRC
-      8080  # Adguard
+      4000  # Searxng
+      3000  # Adguard
+      8008  # Matrix
+      8083  # Calibre
+      8085  # Cinny
+      8787  # FreshRSS
+      8888  # Glance
+      9000  # TheLounge
+      9925  # Mealie
       3923  # Copyparty
       64738 # Mumble
     ];
