@@ -1,0 +1,15 @@
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - /run/user/1000/podman/podman.sock:/var/run/docker.sock:Z
+    ports:
+      - 8888:8080
+
+networks:
+  default:
+    external: true
+    name: shared-network
