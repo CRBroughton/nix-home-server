@@ -1,4 +1,3 @@
-
 # List available commands
 default:
   @just --list
@@ -16,23 +15,37 @@ switch:
 
 # Format all Nix files
 format:
-    #!/usr/bin/env bash
-    if ! command -v nixfmt &> /dev/null; then
-        echo "Error: nixfmt not found. Run 'just switch' first to install it."
-        exit 1
-    fi
-    find . -name '*.nix' -type f -exec nixfmt {} +
-    echo "✓ Formatted all Nix files"
+  #!/usr/bin/env bash
+  if ! command -v nixfmt &> /dev/null; then
+    echo "Error: nixfmt not found. Run 'just switch' first to install it."
+    exit 1
+  fi
+  find . -name '*.nix' -type f -exec nixfmt {} +
+  echo "✓ Formatted all Nix files"
 
-
+# Start all services
 up:
-  podman compose -f services/adguard/compose.yaml up -d
-  podman compose -f services/copyparty/compose.yaml up -d
-  podman compose -f services/mumble/compose.yaml up -d
-  podman compose -f services/irc/compose.yaml up -d
+  #!/usr/bin/env bash
+  for compose in services/*/compose.yaml; do
+    echo "Starting $(dirname $compose)..."
+    podman compose -f "$compose" up -d
+  done
 
+# Stop all services
 down:
-  podman compose -f services/adguard/compose.yaml down
-  podman compose -f services/copyparty/compose.yaml down
-  podman compose -f services/mumble/compose.yaml down
-  podman compose -f services/irc/compose.yaml down
+  #!/usr/bin/env bash
+  for compose in services/*/compose.yaml; do
+    echo "Stopping $(dirname $compose)..."
+    podman compose -f "$compose" down
+  done
+
+# Restart all services
+restart: down up
+
+# Add The Lounge user
+thelounge-adduser username:
+    podman exec -it thelounge thelounge add {{username}}
+
+# Generate IRC operator password
+irc-genpasswd:
+    podman exec -it ergo /ircd-bin/ergo genpasswd
