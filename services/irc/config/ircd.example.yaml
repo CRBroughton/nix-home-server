@@ -80,9 +80,10 @@ accounts:
     #   - "127.0.0.0/8"
 
   # Account registration
+  # Disabled - admins create accounts with: /msg NickServ SAREGISTER username password
   registration:
-    enabled: true
-    allow-before-connect: true
+    enabled: false
+    allow-before-connect: false
     throttling:
       enabled: true
       duration: 10m
