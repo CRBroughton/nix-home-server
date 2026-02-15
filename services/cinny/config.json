@@ -1,0 +1,19 @@
+{
+  "defaultHomeserver": 0,
+  "homeserverList": [
+    "http://nixos-server.tail538465.ts.net:8008"
+  ],
+  "allowCustomHomeservers": true,
+
+  "featuredCommunities": {
+    "openAsDefault": false,
+    "spaces": [],
+    "rooms": [],
+    "servers": []
+  },
+
+  "hashRouter": {
+    "enabled": false,
+    "basename": "/"
+  }
+}
