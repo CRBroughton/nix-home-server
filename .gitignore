@@ -9,3 +9,4 @@ services/calibre/calibre-library
 services/calibre/config
 services/*/volume
 services/*/data
+services/*/certs
