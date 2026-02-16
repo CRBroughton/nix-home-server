@@ -141,6 +141,21 @@
   };
   services.tailscale.enable = true;
 
+  # Automatic garbage collection - delete generations older than 30 days
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
+  # Automatic system updates
+  system.autoUpgrade = {
+    enable = true;
+    flake = "/home/craig/code/nix-home-server";
+    flags = [ "--update-input" "nixpkgs" ];
+    dates = "04:00";
+    allowReboot = false;
+  };
 
   systemd.services."user-linger-craig" = {
     description = "Enable lingering for craig";
