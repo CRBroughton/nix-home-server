@@ -129,6 +129,7 @@
       9000  # TheLounge
       9925  # Mealie
       3923  # Copyparty
+      8080  # Open WebUI
       64738 # Mumble
     ];
    allowedUDPPorts = [
