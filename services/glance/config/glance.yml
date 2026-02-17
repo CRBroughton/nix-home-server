@@ -38,6 +38,8 @@ pages:
                 hide: true
               tailscale-openwebui:
                 hide: true
+              ollama:
+                hide: true
               # HTTP services (Tailscale Funnel)
               cinny:
                 name: Cinny
