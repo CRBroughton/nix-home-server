@@ -36,6 +36,8 @@ pages:
                 hide: true
               tailscale-matrix:
                 hide: true
+              tailscale-openwebui:
+                hide: true
               # HTTP services (Tailscale Funnel)
               cinny:
                 name: Cinny
@@ -61,6 +63,10 @@ pages:
                 name: Mealie
                 description: Meal planner (web client)
                 url: https://mealie.tail538465.ts.net
+              openwebui:
+                name: Open WebUI
+                description: LLM chat interface (Ollama)
+                url: https://openwebui.tail538465.ts.net
               synapse:
                 name: Matrix
                 description: Matrix chat server
