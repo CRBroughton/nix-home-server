@@ -152,7 +152,7 @@
   # Automatic system updates
   system.autoUpgrade = {
     enable = true;
-    flake = "/home/craig/code/nix-home-server";
+    flake = "/etc/nixos";
     flags = [ "--update-input" "nixpkgs" ];
     dates = "04:00";
     allowReboot = false;
