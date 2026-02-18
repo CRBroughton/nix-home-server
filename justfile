@@ -13,6 +13,10 @@ update-flakes:
 switch:
   sudo nixos-rebuild switch --flake /etc/nixos#nixos-server
 
+# Trust /etc/nixos git repo for root (fixes nixos-upgrade ownership error)
+fix-git-ownership:
+  sudo git config --global --add safe.directory /etc/nixos
+
 # Format all Nix files
 format:
   #!/usr/bin/env bash
