@@ -7,6 +7,20 @@ pages:
             servers:
             - type: local
               name: Services
+
+          - type: custom-api
+            title: Backups
+            cache: 1h
+            url: https://restic-exporter.tail538465.ts.net/stats
+            template: |
+              {{ if eq (.JSON.String "status") "ok" }}
+              Last backup: {{ .JSON.String "latest_snapshot.time" | parseTime "2006-01-02T15:04:05.999999999Z07:00" | formatTime "02 Jan 2006 15:04" }}
+              Snapshots: {{ .JSON.Int "snapshot_count" }} | Size: {{ .JSON.String "total_size" }} | Dedupe: {{ .JSON.Float "dedupe_ratio" }}x
+              {{ else }}
+              Status: {{ .JSON.String "status" }}
+              {{ if .JSON.String "error" }}Error: {{ .JSON.String "error" }}{{ end }}
+              {{ end }}
+
       - size: full
         widgets:
           - type: docker-containers
@@ -15,6 +29,10 @@ pages:
               glance:
                 hide: true
               tailscale-glance:
+                hide: true
+              restic-exporter:
+                hide: true
+              tailscale-restic-exporter:
                 hide: true
               tailscale-cinny:
                 hide: true
