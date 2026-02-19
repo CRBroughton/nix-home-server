@@ -251,13 +251,12 @@ function main(): void {
   console.log(`Refresh interval: ${REFRESH_INTERVAL / 1000}s`);
   console.log(`Port: ${PORT}`);
 
-  // Start background updater
-  startStatsUpdater();
-
-  // Start HTTP server
+  // Start HTTP server first so it's responsive immediately
   const server = createServer(toNodeListener(app));
   server.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
+    // Start background updater after server is ready
+    startStatsUpdater();
   });
 }
 
