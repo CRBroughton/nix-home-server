@@ -54,6 +54,8 @@ pages:
                 hide: true
               tailscale-openwebui:
                 hide: true
+              tailscale-restic-exporter:
+                hide: true
               ollama:
                 hide: true
               # HTTP services (Tailscale Funnel)
