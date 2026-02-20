@@ -184,6 +184,18 @@
     allowReboot = false;
   };
 
+  # Pull latest configuration before auto-upgrade
+  systemd.services."nixos-upgrade-git-pull" = {
+    description = "Pull latest NixOS configuration from git";
+    before = [ "nixos-upgrade.service" ];
+    wantedBy = [ "nixos-upgrade.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      WorkingDirectory = "/etc/nixos";
+      ExecStart = "${pkgs.git}/bin/git pull --ff-only";
+    };
+  };
+
   systemd.services."user-linger-craig" = {
     description = "Enable lingering for craig";
     wantedBy = [ "multi-user.target" ];
