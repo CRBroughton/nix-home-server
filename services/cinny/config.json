@@ -1,7 +1,7 @@
 {
   "defaultHomeserver": 0,
   "homeserverList": [
-    "http://nixos-server.tail538465.ts.net:8008"
+    "matrix.tail538465.ts.net"
   ],
   "allowCustomHomeservers": true,
 
