@@ -94,10 +94,12 @@ pages:
               # Hidden services
               synapse-db:
                 hide: true
+              tailscale-searxng:
+                hide: true
               searxng:
                 name: SearXNG
                 description: Local search engine (web client)
-                url: http://nixos-server.tail538465.ts.net:4000
+                url: https://searxng.tail538465.ts.net
               # Non-HTTP services (MagicDNS only)
               adguard:
                 name: Adguard
