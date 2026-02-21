@@ -69,3 +69,7 @@ flash-pi device:
     nix-shell -p zstd --run "zstd -dc '$img' | sudo dd of={{device}} bs=4M status=progress conv=fsync"
     sync
     echo "Done! Remove SD card and boot your Pi."
+
+# Partition disk with disko (for reinstall, e.g., just disko /dev/nvme0n1)
+disko device="/dev/nvme0n1":
+    sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./disko-config.nix --arg device '"{{device}}"'
