@@ -36,6 +36,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable aarch64 emulation for building Pi images
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.

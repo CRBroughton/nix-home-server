@@ -53,3 +53,9 @@ thelounge-adduser username:
 # Generate IRC operator password
 irc-genpasswd:
     podman exec -it ergo /ircd-bin/ergo genpasswd
+
+# Build Pi SD card image
+build-pi:
+    nix build ./pi-nixos#images.pi
+    @echo "Image built: result/sd-image/"
+    @ls -lh result/sd-image/
