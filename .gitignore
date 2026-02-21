@@ -10,3 +10,5 @@ services/calibre/config
 services/*/volume
 services/*/data
 services/*/certs
+services/searxng/config
+services/tailscale
