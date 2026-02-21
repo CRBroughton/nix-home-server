@@ -58,6 +58,18 @@ pages:
                 hide: true
               ollama:
                 hide: true
+              tailscale-penpot:
+                hide: true
+              penpot-backend:
+                hide: true
+              penpot-exporter:
+                hide: true
+              penpot-postgres:
+                hide: true
+              penpot-valkey:
+                hide: true
+              tailscale-nostr:
+                hide: true
               # HTTP services (Tailscale Funnel)
               cinny:
                 name: Cinny
@@ -100,6 +112,14 @@ pages:
                 name: SearXNG
                 description: Local search engine (web client)
                 url: https://searxng.tail538465.ts.net
+              penpot-frontend:
+                name: Penpot
+                description: Design tool (Figma alternative)
+                url: https://penpot.tail538465.ts.net
+              nostr-relay:
+                name: Nostr Relay
+                description: Personal Nostr relay
+                url: https://nostr.tail538465.ts.net
               # Non-HTTP services (MagicDNS only)
               adguard:
                 name: Adguard
