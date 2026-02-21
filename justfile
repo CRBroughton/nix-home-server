@@ -59,3 +59,13 @@ build-pi:
     nix build ./pi-nixos#images.pi
     @echo "Image built: result/sd-image/"
     @ls -lh result/sd-image/
+
+# Flash Pi to SD card (e.g., just flash-pi /dev/sdb)
+flash-pi device:
+    #!/usr/bin/env bash
+    set -e
+    img=$(find result/sd-image -name "*.img.zst" | head -1)
+    echo "Flashing $img to {{device}}..."
+    nix-shell -p zstd --run "zstd -dc '$img' | sudo dd of={{device}} bs=4M status=progress conv=fsync"
+    sync
+    echo "Done! Remove SD card and boot your Pi."
