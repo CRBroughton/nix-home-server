@@ -223,8 +223,8 @@
           dir=$(dirname "$compose")
           echo "Updating $dir..."
           cd "$dir"
-          ${pkgs.podman-compose}/bin/podman-compose pull --ignore-pull-failures
-          ${pkgs.podman-compose}/bin/podman-compose up -d --remove-orphans
+          ${pkgs.podman-compose}/bin/podman-compose pull || true
+          ${pkgs.podman-compose}/bin/podman-compose up -d
         done
         # Prune old images
         ${pkgs.podman}/bin/podman image prune -f
