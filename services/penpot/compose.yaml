@@ -72,6 +72,7 @@ services:
     environment:
       - PENPOT_PUBLIC_URI=http://penpot-frontend
       - PENPOT_REDIS_URI=redis://penpot-valkey/0
+      - PENPOT_SECRET_KEY=your-secret-key-change-me
 
   penpot-postgres:
     image: postgres:15
