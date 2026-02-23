@@ -1,14 +1,21 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 
 {
+  imports = [
+    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+  ];
+
   # Pi 3 B+ specific settings
   hardware.enableRedistributableFirmware = true;
 
   # Needed for Pi 3
   boot.kernelParams = [ "console=ttyS1,115200n8" ];
 
-  # Disable due to Pi 3 memory constraints (1GB RAM)
-  nix.settings.max-jobs = 2;
+  # Nix settings
+  nix.settings = {
+    max-jobs = 2;  # Pi 3 memory constraints (1GB RAM)
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   # Swap helps on 1GB Pi
   swapDevices = [{
@@ -53,9 +60,9 @@
     backend = "podman";
     containers.uptime-kuma = {
       image = "louislam/uptime-kuma:1";
-      ports = [ "3001:3001" ];
       volumes = [ "uptime-kuma:/app/data" ];
       autoStart = true;
+      extraOptions = [ "--network=host" ];  # Use host network for Tailscale access
     };
   };
 
