@@ -73,3 +73,8 @@ flash-pi device:
 # Partition disk with disko (for reinstall, e.g., just disko /dev/nvme0n1)
 disko device="/dev/nvme0n1":
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./disko-config.nix --arg device '"{{device}}"'
+
+
+# Deploy Pi config (builds on server, deploys to Pi)
+deploy-pi:
+    cd pi-nixos && nixos-rebuild switch --flake .#pi --target-host craig@pi-monitor --build-host localhost --use-remote-sudo
