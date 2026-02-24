@@ -6,18 +6,16 @@ NixOS configuration for Raspberry Pi 3 B+ running Uptime Kuma for monitoring.
 
 ### Build the SD Card Image
 
-From your main PC (requires aarch64 emulation enabled):
+From your main server (requires aarch64 emulation enabled):
 
 ```bash
-cd pi-nixos
-nix build .#images.pi
+just build-pi
 ```
 
-The image will be at `./result/sd-image/*.img.zst`. Decompress and flash to SD card:
+Then flash to SD card (replace `/dev/sdX` with your SD card device):
 
 ```bash
-zstd -d result/sd-image/*.img.zst -o pi.img
-sudo dd if=pi.img of=/dev/sdX bs=4M status=progress
+just flash-pi /dev/sdX
 ```
 
 ### First Boot
@@ -28,22 +26,36 @@ sudo dd if=pi.img of=/dev/sdX bs=4M status=progress
 4. SSH in: `ssh craig@<ip-address>`
 5. Join Tailscale: `sudo tailscale up`
 
-## Updating the Configuration
+### Bootstrap Trust Setup (First Deployment Only)
 
-After modifying `configuration.nix`, deploy changes from your main PC:
+The first deployment must build on the Pi to establish trust. From your server, run:
 
 ```bash
-# Copy the config to the Pi
-scp configuration.nix craig@pi-monitor:/tmp/
-
-# Apply the changes
-ssh craig@pi-monitor "sudo cp /tmp/configuration.nix /etc/nixos/ && sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix"
+cd pi-nixos && nixos-rebuild switch --flake .#pi --target-host craig@pi-monitor --build-host craig@pi-monitor --sudo
 ```
 
-Or as a one-liner:
+This will be slow (builds on the 1GB Pi) but only needs to run once. After this completes, future deployments using `just deploy-pi` will build on the server (fast).
+
+## Updating the Configuration
+
+After modifying `configuration.nix`, deploy changes from your main server using the justfile:
 
 ```bash
-scp configuration.nix craig@pi-monitor:/tmp/ && ssh craig@pi-monitor "sudo cp /tmp/configuration.nix /etc/nixos/ && sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix"
+just deploy-pi
+```
+
+This builds the configuration on the server (faster than building on Pi) and deploys it remotely.
+
+Or run the full command manually (builds on server):
+
+```bash
+cd pi-nixos && nixos-rebuild switch --flake .#pi --target-host craig@pi-monitor --build-host localhost --sudo
+```
+
+To build directly on the Pi (slower, doesn't require trust setup):
+
+```bash
+cd pi-nixos && nixos-rebuild switch --flake .#pi --target-host craig@pi-monitor --sudo
 ```
 
 ## Services
@@ -63,12 +75,13 @@ scp configuration.nix craig@pi-monitor:/tmp/ && ssh craig@pi-monitor "sudo cp /t
 
 ## Troubleshooting
 
-### Can't rebuild - flakes error
+### Can't deploy from server
 
-Use the `-I` flag to specify the config location:
+Make sure the Pi is reachable via Tailscale:
 
 ```bash
-sudo nixos-rebuild switch -I nixos-config=/etc/nixos/configuration.nix
+ping pi-monitor
+ssh craig@pi-monitor
 ```
 
 ### Container can't reach Tailscale hosts
