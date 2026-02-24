@@ -65,7 +65,7 @@
   virtualisation.oci-containers = {
     backend = "podman";
     containers.uptime-kuma = {
-      image = "louislam/uptime-kuma:1";
+      image = "louislam/uptime-kuma:2";
       volumes = [
         "uptime-kuma:/app/data"
         "/run/podman/podman.sock:/var/run/docker.sock:ro"
