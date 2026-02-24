@@ -100,6 +100,65 @@ just flash-pi /dev/sdX  # Flash to SD card
 4. Join Tailscale: `sudo tailscale up`
 5. Access Uptime Kuma at `http://pi-monitor:3001` (via Tailscale)
 
+## Matrix/Synapse Administration
+
+### Create a new user
+
+```bash
+podman exec -it synapse register_new_matrix_user -c /data/homeserver.yaml http://localhost:8008
+```
+
+You'll be prompted for:
+- Username
+- Password
+- Whether to make them an admin
+
+### Create a user non-interactively
+
+```bash
+podman exec -it synapse register_new_matrix_user \
+  -c /data/homeserver.yaml \
+  -u USERNAME \
+  -p PASSWORD \
+  -a  # Add -a flag for admin, omit for regular user \
+  http://localhost:8008
+```
+
+### Reset a user's password
+
+```bash
+podman exec -it synapse hash_password
+# Copy the hash, then use the admin API or update the database
+```
+
+### Set up a notification bot for Uptime Kuma
+
+Create a dedicated bot user rather than using your personal account's access token, as it grants full access to your account and all rooms you've joined.
+
+1. Create a new user for the bot:
+```bash
+podman exec -it synapse register_new_matrix_user \
+  -c /data/homeserver.yaml \
+  -u kuma \
+  -p YOUR_BOT_PASSWORD \
+  http://localhost:8008
+```
+
+2. Get the access token:
+```bash
+curl -XPOST -d '{"type": "m.login.password", "identifier": {"user": "kuma", "type": "m.id.user"}, "password": "YOUR_BOT_PASSWORD"}' "https://matrix.tail538465.ts.net/_matrix/client/r0/login"
+```
+
+3. Create a room for notifications and invite the bot user
+
+4. Accept the invite on behalf of the bot:
+```bash
+curl -XPOST -H "Authorization: Bearer YOUR_ACCESS_TOKEN" "https://matrix.tail538465.ts.net/_matrix/client/r0/join/ROOM_ID"
+```
+The room ID looks like `!abc123:matrix.tail538465.ts.net` (find it in your Matrix client's room settings).
+
+5. In Uptime Kuma, add a Matrix notification using the access token and room ID
+
 ## Automated Maintenance
 
 The server runs these tasks automatically:
