@@ -16,6 +16,7 @@
     max-jobs = 2;  # Pi 3 memory constraints (1GB RAM)
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "craig" ];
+    require-sigs = false;  # Allow unsigned builds from server
   };
 
   # Swap helps on 1GB Pi
