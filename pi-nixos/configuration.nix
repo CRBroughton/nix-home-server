@@ -54,11 +54,8 @@
   environment.systemPackages = with pkgs; [
     vim
     git
-    htop
     btop
     curl
-    lazydocker
-    podman-compose
   ];
 
   # Use OCI containers (lighter than full podman daemon)
@@ -68,14 +65,11 @@
       image = "louislam/uptime-kuma:2";
       volumes = [
         "uptime-kuma:/app/data"
-        "/run/podman/podman.sock:/var/run/docker.sock:ro"
       ];
       autoStart = true;
       extraOptions = [ "--network=host" ];  # Use host network for Tailscale access
     };
   };
-
-  virtualisation.podman.enable = true;
 
   # Firewall
   networking.firewall = {
