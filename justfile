@@ -77,4 +77,4 @@ disko device="/dev/nvme0n1":
 
 # Deploy Pi config (builds on server, deploys to Pi)
 deploy-pi:
-    cd pi-nixos && nixos-rebuild switch --flake .#pi --target-host craig@pi-monitor --build-host localhost --use-remote-sudo
+    cd pi-nixos && nixos-rebuild switch --flake .#pi --target-host craig@pi-monitor --build-host localhost --sudo
