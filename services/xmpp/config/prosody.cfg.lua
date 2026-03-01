@@ -108,6 +108,9 @@ VirtualHost "xmpp.tail538465.ts.net"
     -- Allow registration (safe since only accessible via Tailscale)
     allow_registration = true
 
+    -- Enable conversejs web client for this host
+    modules_enabled = { "conversejs" }
+
 ---------- Components ----------
 
 -- Multi-User Chat (rooms)
