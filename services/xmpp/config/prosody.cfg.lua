@@ -39,7 +39,8 @@ modules_enabled = {
 
     -- Admin tools
     "admin_adhoc";     -- Admin commands
-    "register";        -- In-band registration
+    "admin_shell";     -- prosodyctl shell commands
+    -- "register";     -- In-band registration (disabled)
     "announce";        -- Broadcast messages to users (admin only)
     -- "motd";            -- Message of the day on login
     "watchregistrations";  -- Notify admins of new signups via XMPP
@@ -104,8 +105,7 @@ motd_text = [[Welcome to the XMPP server!]]
 ---------- Virtual hosts ----------
 
 VirtualHost "xmpp.tail538465.ts.net"
-    -- Allow registration (safe since only accessible via Tailscale)
-    allow_registration = true
+    allow_registration = false
 
 ---------- Components ----------
 
