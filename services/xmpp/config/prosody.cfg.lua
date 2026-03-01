@@ -40,10 +40,14 @@ modules_enabled = {
     -- Admin tools
     "admin_adhoc";     -- Admin commands
     "register";        -- In-band registration
+    "announce";        -- Broadcast messages to users (admin only)
+    "motd";            -- Message of the day on login
+    "watchregistrations";  -- Notify admins of new signups via XMPP
 
     -- HTTP modules (for web clients)
     "bosh";            -- BOSH support
     "websocket";       -- WebSocket support
+    "conversejs";      -- Built-in web client at /conversejs
 }
 
 modules_disabled = {
@@ -94,6 +98,9 @@ https_ports = {}
 https_interfaces = {}
 
 -- cross_domain options deprecated in Prosody 0.12+
+
+-- Message of the Day (shown once per login)
+motd_text = [[Welcome to the XMPP server!]]
 
 ---------- Virtual hosts ----------
 
