@@ -70,6 +70,8 @@ pages:
                 hide: true
               tailscale-nostr:
                 hide: true
+              tailscale-xmpp:
+                hide: true
               # HTTP services (Tailscale Funnel)
               cinny:
                 name: Cinny
@@ -131,6 +133,9 @@ pages:
               ergo:
                 name: IRC
                 description: Local IRC chat server
+              prosody:
+                name: XMPP
+                description: Prosody XMPP chat server
 
   - name: Home
     # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look
