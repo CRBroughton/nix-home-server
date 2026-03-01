@@ -30,6 +30,13 @@ modules_enabled = {
     "vcard4";          -- User profiles
     "vcard_legacy";    -- Compatibility with legacy vCards
 
+    -- Connection reliability
+    "smacks";          -- Stream Management (XEP-0198) - resume after disconnect
+    "bookmarks";       -- Bookmark sync across clients (XEP-0402)
+
+    -- Voice/video calls
+    "turn_external";   -- Advertise STUN/TURN servers for Jingle calls
+
     -- Admin tools
     "admin_adhoc";     -- Admin commands
     "register";        -- In-band registration
@@ -71,6 +78,13 @@ ssl = {
 
 -- Security settings
 c2s_require_encryption = true
+
+-- STUN/TURN for voice/video calls (XEP-0215)
+-- Using public STUN server (no auth needed for STUN)
+-- Since all clients are on Tailscale, they connect directly after STUN discovery
+turn_external_host = "stun.l.google.com"
+turn_external_port = 19302
+turn_external_secret = "unused"  -- Not used for STUN-only
 
 -- HTTP settings (for BOSH/WebSocket)
 -- Tailscale serve handles HTTPS termination on port 443
