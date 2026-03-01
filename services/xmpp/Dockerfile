@@ -7,7 +7,8 @@ RUN apt-get update && \
         gnupg \
         curl \
         ca-certificates \
-        lua-dbi-sqlite3 && \
+        lua-dbi-sqlite3 \
+        luarocks && \
     curl -fsSL https://prosody.im/files/prosody-debian-packages.key | gpg --dearmor -o /usr/share/keyrings/prosody.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/prosody.gpg] https://packages.prosody.im/debian bookworm main" > /etc/apt/sources.list.d/prosody.list && \
     apt-get update && \
