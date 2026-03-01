@@ -6,6 +6,9 @@
 -- Allow running as root (needed for rootless Podman)
 run_as_root = true
 
+-- Plugin paths for community modules installed via prosodyctl
+plugin_paths = { "/var/lib/prosody/custom_plugins" }
+
 -- Admin accounts (full JID)
 admins = { "CRBroughton@xmpp.tail538465.ts.net" }
 

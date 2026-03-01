@@ -6,13 +6,17 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         gnupg \
         curl \
-        ca-certificates && \
+        ca-certificates \
+        lua-dbi-sqlite3 && \
     curl -fsSL https://prosody.im/files/prosody-debian-packages.key | gpg --dearmor -o /usr/share/keyrings/prosody.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/prosody.gpg] https://packages.prosody.im/debian bookworm main" > /etc/apt/sources.list.d/prosody.list && \
     apt-get update && \
     apt-get install -y --no-install-recommends prosody prosody-modules && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Install community modules via prosodyctl
+RUN prosodyctl install --server=https://modules.prosody.im/rocks/ mod_conversejs
 
 # Create necessary directories
 RUN mkdir -p /var/run/prosody /var/lib/prosody && \
