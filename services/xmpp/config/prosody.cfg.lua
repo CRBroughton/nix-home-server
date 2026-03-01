@@ -6,9 +6,6 @@
 -- Allow running as root (needed for rootless Podman)
 run_as_root = true
 
--- Plugin paths for community modules installed via prosodyctl
-plugin_paths = { "/var/lib/prosody/custom_plugins" }
-
 -- Admin accounts (full JID)
 admins = { "CRBroughton@xmpp.tail538465.ts.net" }
 
@@ -44,13 +41,12 @@ modules_enabled = {
     "admin_adhoc";     -- Admin commands
     "register";        -- In-band registration
     "announce";        -- Broadcast messages to users (admin only)
-    "motd";            -- Message of the day on login
+    -- "motd";            -- Message of the day on login
     "watchregistrations";  -- Notify admins of new signups via XMPP
 
     -- HTTP modules (for web clients)
     "bosh";            -- BOSH support
     "websocket";       -- WebSocket support
-    "conversejs";      -- Built-in web client at /conversejs
 }
 
 modules_disabled = {
@@ -110,9 +106,6 @@ motd_text = [[Welcome to the XMPP server!]]
 VirtualHost "xmpp.tail538465.ts.net"
     -- Allow registration (safe since only accessible via Tailscale)
     allow_registration = true
-
-    -- Enable conversejs web client for this host
-    modules_enabled = { "conversejs" }
 
 ---------- Components ----------
 
