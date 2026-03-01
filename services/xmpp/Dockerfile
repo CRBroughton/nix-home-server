@@ -7,8 +7,7 @@ RUN apt-get update && \
         gnupg \
         curl \
         ca-certificates \
-        lua-dbi-sqlite3 \
-        luarocks && \
+        lua-dbi-sqlite3 && \
     curl -fsSL https://prosody.im/files/prosody-debian-packages.key | gpg --dearmor -o /usr/share/keyrings/prosody.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/prosody.gpg] https://packages.prosody.im/debian bookworm main" > /etc/apt/sources.list.d/prosody.list && \
     apt-get update && \
@@ -16,8 +15,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install community modules via prosodyctl
-RUN prosodyctl install --server=https://modules.prosody.im/rocks/ mod_conversejs
+# Download mod_conversejs directly from community modules
+RUN mkdir -p /var/lib/prosody/custom_plugins && \
+    curl -fsSL https://hg.prosody.im/prosody-modules/raw-file/tip/mod_conversejs/mod_conversejs.lua \
+        -o /var/lib/prosody/custom_plugins/mod_conversejs.lua
 
 # Create necessary directories
 RUN mkdir -p /var/run/prosody /var/lib/prosody && \
