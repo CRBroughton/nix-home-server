@@ -7,7 +7,7 @@
 run_as_root = true
 
 -- Admin accounts (full JID)
-admins = { "craig@xmpp.tail538465.ts.net" }
+admins = { "CRBroughton@xmpp.tail538465.ts.net" }
 
 -- Network interfaces to listen on
 interfaces = { "*" }
@@ -60,7 +60,7 @@ authentication = "internal_hashed"
 storage = "internal"
 
 -- Archive settings (message history)
-archive_expires_after = "1y"  -- Keep messages for 1 year
+archive_expires_after = "10y"  -- Keep messages for 1 year
 default_archive_policy = true  -- Archive by default
 
 -- Logging
