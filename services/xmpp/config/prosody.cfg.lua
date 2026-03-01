@@ -32,6 +32,7 @@ modules_enabled = {
 
     -- Admin tools
     "admin_adhoc";     -- Admin commands
+    "register";        -- In-band registration
 
     -- HTTP modules (for web clients)
     "bosh";            -- BOSH support
@@ -83,5 +84,5 @@ cross_domain_websocket = true
 ---------- Virtual hosts ----------
 
 VirtualHost "xmpp.tail538465.ts.net"
-    -- Enable user registration (disable after creating accounts)
-    allow_registration = false
+    -- Allow registration (safe since only accessible via Tailscale)
+    allow_registration = true
