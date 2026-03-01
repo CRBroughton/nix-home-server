@@ -93,3 +93,9 @@ VirtualHost "xmpp.tail538465.ts.net"
 Component "rooms.xmpp.tail538465.ts.net" "muc"
     modules_enabled = { "muc_mam" }  -- Message history in rooms
     restrict_room_creation = false   -- Anyone can create rooms
+
+-- HTTP File Upload
+Component "upload.xmpp.tail538465.ts.net" "http_upload"
+    http_upload_file_size_limit = 104857600  -- 100MB max file size
+    http_upload_expire_after = 604800        -- Files expire after 7 days
+    http_upload_quota = 1073741824           -- 1GB per user quota
