@@ -112,7 +112,7 @@ VirtualHost "xmpp.tail538465.ts.net"
 -- Multi-User Chat (rooms)
 Component "rooms.xmpp.tail538465.ts.net" "muc"
     modules_enabled = { "muc_mam" }  -- Message history in rooms
-    restrict_room_creation = false   -- Anyone can create rooms
+    restrict_room_creation = true    -- Only admins can create rooms
 
 -- HTTP File Upload (Prosody 0.12 built-in)
 Component "upload.xmpp.tail538465.ts.net" "http_file_share"
