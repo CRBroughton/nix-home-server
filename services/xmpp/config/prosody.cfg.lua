@@ -72,8 +72,8 @@ log = {
 certificates = "/etc/prosody/certs"
 
 ssl = {
-    certificate = "/etc/prosody/certs/xmpp.crt";
-    key = "/etc/prosody/certs/xmpp.key";
+    certificate = "/etc/prosody/certs/xmpp.tail538465.ts.net.crt";
+    key = "/etc/prosody/certs/xmpp.tail538465.ts.net.key";
 }
 
 -- Security settings

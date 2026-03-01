@@ -14,6 +14,7 @@ services:
     volumes:
       - ./tailscale:/var/lib/tailscale:Z
       - ./serve.json:/config/serve.json:ro
+      - ./certs:/certs:Z
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
