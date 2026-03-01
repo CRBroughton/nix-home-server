@@ -3,6 +3,9 @@
 
 ---------- Server-wide settings ----------
 
+-- Allow running as root (needed for rootless Podman)
+run_as_root = true
+
 -- Admin accounts (full JID)
 admins = { "craig@xmpp.tail538465.ts.net" }
 
@@ -19,19 +22,16 @@ modules_enabled = {
 
     -- Nice to have
     "blocklist";       -- Block users
-    "bookmarks";       -- Sync bookmarks
     "carbons";         -- Message synchronization
     "csi";             -- Client state indication
     "mam";             -- Message Archive Management (history)
     "pep";             -- Personal Eventing Protocol
     "private";         -- Private XML storage
-    "smacks";          -- Stream management / reconnection
     "vcard4";          -- User profiles
     "vcard_legacy";    -- Compatibility with legacy vCards
 
     -- Admin tools
     "admin_adhoc";     -- Admin commands
-    "admin_shell";     -- Admin shell access
 
     -- HTTP modules (for web clients)
     "bosh";            -- BOSH support
@@ -61,8 +61,8 @@ log = {
     info = "*console";
 }
 
--- Security settings
-c2s_require_encryption = true
+-- Security settings (Tailscale handles encryption)
+c2s_require_encryption = false
 
 -- HTTP settings (for BOSH/WebSocket)
 http_ports = { 5280 }

@@ -26,7 +26,8 @@ services:
     depends_on:
       - tailscale-xmpp
 
-    user: "0:0"
+    entrypoint: ["/usr/bin/prosody"]
+    command: ["-F"]
 
     volumes:
       # Configuration
