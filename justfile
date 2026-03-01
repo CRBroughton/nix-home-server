@@ -58,6 +58,12 @@ irc-genpasswd:
 xmpp-adduser username:
     podman exec -it prosody prosodyctl adduser {{username}}@xmpp.tail538465.ts.net
 
+# Generate XMPP self-signed certificate (valid 10 years)
+xmpp-gencert:
+    mkdir -p services/xmpp/certs
+    openssl req -new -x509 -days 3650 -nodes -out services/xmpp/certs/xmpp.crt -keyout services/xmpp/certs/xmpp.key -subj "/CN=xmpp.tail538465.ts.net"
+    @echo "Certificate generated. Restart Prosody: podman restart prosody"
+
 # Build Pi SD card image
 build-pi:
     nix build ./pi-nixos#images.pi
