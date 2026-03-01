@@ -61,8 +61,16 @@ log = {
     info = "*console";
 }
 
--- Security settings (Tailscale handles encryption)
-c2s_require_encryption = false
+-- TLS certificates
+certificates = "/etc/prosody/certs"
+
+ssl = {
+    certificate = "/etc/prosody/certs/xmpp.crt";
+    key = "/etc/prosody/certs/xmpp.key";
+}
+
+-- Security settings
+c2s_require_encryption = true
 
 -- HTTP settings (for BOSH/WebSocket)
 http_ports = { 5280 }

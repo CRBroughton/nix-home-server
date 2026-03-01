@@ -32,6 +32,8 @@ services:
     volumes:
       # Configuration
       - ./config/prosody.cfg.lua:/etc/prosody/prosody.cfg.lua:ro,Z
+      # Certificates
+      - ./certs:/etc/prosody/certs:ro,Z
       # Persistent data (accounts, messages, etc)
       - ./data:/var/lib/prosody:Z
 

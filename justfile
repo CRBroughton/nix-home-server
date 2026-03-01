@@ -54,6 +54,10 @@ thelounge-adduser username:
 irc-genpasswd:
     podman exec -it ergo /ircd-bin/ergo genpasswd
 
+# Add XMPP user (e.g., just xmpp-adduser craig)
+xmpp-adduser username:
+    podman exec -it prosody prosodyctl adduser {{username}}@xmpp.tail538465.ts.net
+
 # Build Pi SD card image
 build-pi:
     nix build ./pi-nixos#images.pi
