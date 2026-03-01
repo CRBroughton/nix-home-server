@@ -19,15 +19,13 @@ services:
       - /dev/net/tun:/dev/net/tun
 
   prosody:
-    image: docker.io/prosody/prosody:latest
+    build: .
+    image: localhost/prosody-custom:latest
     container_name: prosody
     restart: unless-stopped
     network_mode: service:tailscale-xmpp
     depends_on:
       - tailscale-xmpp
-
-    entrypoint: ["/usr/bin/prosody"]
-    command: ["-F"]
 
     volumes:
       # Configuration

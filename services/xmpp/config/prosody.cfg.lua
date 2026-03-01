@@ -37,7 +37,6 @@ modules_enabled = {
     -- HTTP modules (for web clients)
     "bosh";            -- BOSH support
     "websocket";       -- WebSocket support
-    "http_files";      -- Serve static files
 }
 
 modules_disabled = {
@@ -78,8 +77,7 @@ http_ports = { 5280 }
 http_interfaces = { "*" }
 https_ports = {}
 
-cross_domain_bosh = true
-cross_domain_websocket = true
+-- cross_domain options deprecated in Prosody 0.12+
 
 ---------- Virtual hosts ----------
 
@@ -94,8 +92,7 @@ Component "rooms.xmpp.tail538465.ts.net" "muc"
     modules_enabled = { "muc_mam" }  -- Message history in rooms
     restrict_room_creation = false   -- Anyone can create rooms
 
--- HTTP File Upload
-Component "upload.xmpp.tail538465.ts.net" "http_upload"
-    http_upload_file_size_limit = 104857600  -- 100MB max file size
-    http_upload_expire_after = 604800        -- Files expire after 7 days
-    http_upload_quota = 1073741824           -- 1GB per user quota
+-- HTTP File Upload (Prosody 0.12 built-in)
+Component "upload.xmpp.tail538465.ts.net" "http_file_share"
+    http_file_share_size_limit = 104857600  -- 100MB max file size
+    http_file_share_expires_after = 604800  -- Files expire after 7 days
