@@ -18,6 +18,7 @@ NixOS-based self-hosted server using Podman containers and Tailscale.
 - **Open WebUI** - LLM interface
 - **SearXNG** - Search engine
 - **TheLounge** - IRC web client
+- **XMPP/Prosody** - XMPP server
 
 ## Quick Commands
 

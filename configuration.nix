@@ -134,6 +134,8 @@
       3923  # Copyparty
       8080  # Open WebUI
       64738 # Mumble
+      5222  # XMPP (Prosody)
+      5280  # XMPP HTTP (BOSH/WebSocket)
     ];
    allowedUDPPorts = [
       53    # Adguard
