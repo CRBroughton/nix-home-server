@@ -40,7 +40,7 @@ modules_enabled = {
     -- Admin tools
     "admin_adhoc";     -- Admin commands
     "admin_shell";     -- prosodyctl shell commands
-    -- "register";     -- In-band registration (disabled)
+    "register";        -- Account management (needed for password changes)
     "announce";        -- Broadcast messages to users (admin only)
     -- "motd";            -- Message of the day on login
     "watchregistrations";  -- Notify admins of new signups via XMPP
