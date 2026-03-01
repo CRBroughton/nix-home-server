@@ -86,3 +86,10 @@ cross_domain_websocket = true
 VirtualHost "xmpp.tail538465.ts.net"
     -- Allow registration (safe since only accessible via Tailscale)
     allow_registration = true
+
+---------- Components ----------
+
+-- Multi-User Chat (rooms)
+Component "rooms.xmpp.tail538465.ts.net" "muc"
+    modules_enabled = { "muc_mam" }  -- Message history in rooms
+    restrict_room_creation = false   -- Anyone can create rooms
