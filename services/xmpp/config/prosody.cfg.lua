@@ -73,10 +73,11 @@ ssl = {
 c2s_require_encryption = true
 
 -- HTTP settings (for BOSH/WebSocket)
+-- Tailscale serve handles HTTPS termination on port 443
 http_ports = { 5280 }
 http_interfaces = { "*" }
-https_ports = { 5281 }
-https_interfaces = { "*" }
+https_ports = {}
+https_interfaces = {}
 
 -- cross_domain options deprecated in Prosody 0.12+
 
@@ -98,4 +99,4 @@ Component "upload.xmpp.tail538465.ts.net" "http_file_share"
     http_file_share_size_limit = 104857600  -- 100MB max file size
     http_file_share_expires_after = 604800  -- Files expire after 7 days
     http_host = "xmpp.tail538465.ts.net"
-    http_external_url = "https://xmpp.tail538465.ts.net:5281"
+    http_external_url = "https://xmpp.tail538465.ts.net"

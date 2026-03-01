@@ -136,7 +136,6 @@
       64738 # Mumble
       5222  # XMPP (Prosody)
       5280  # XMPP HTTP (BOSH/WebSocket)
-      5281  # XMPP HTTPS (file upload)
     ];
    allowedUDPPorts = [
       53    # Adguard
