@@ -26,6 +26,10 @@ services:
     depends_on:
       - tailscale-xmpp
 
+    environment:
+      - LOCAL_USER_ID=0
+      - LOCAL_GROUP_ID=0
+
     volumes:
       # Configuration
       - ./config/prosody.cfg.lua:/etc/prosody/prosody.cfg.lua:ro,Z
