@@ -32,8 +32,6 @@ pages:
                 hide: true
               restic-exporter:
                 hide: true
-              tailscale-cinny:
-                hide: true
               tailscale-thelounge:
                 hide: true
               tailscale-freshrss:
@@ -49,8 +47,6 @@ pages:
               tailscale-irc:
                 hide: true
               tailscale-mealie:
-                hide: true
-              tailscale-matrix:
                 hide: true
               tailscale-openwebui:
                 hide: true
@@ -75,10 +71,6 @@ pages:
               tailscale-linkding:
                 hide: true
               # HTTP services (Tailscale Funnel)
-              cinny:
-                name: Cinny
-                description: Chat server (web client)
-                url: https://cinny.tail538465.ts.net
               thelounge:
                 name: The lounge
                 description: IRC server (web client)
@@ -103,13 +95,7 @@ pages:
                 name: Open WebUI
                 description: LLM chat interface (Ollama)
                 url: https://openwebui.tail538465.ts.net
-              synapse:
-                name: Matrix
-                description: Matrix chat server
-                url: https://matrix.tail538465.ts.net
               # Hidden services
-              synapse-db:
-                hide: true
               tailscale-searxng:
                 hide: true
               searxng:
