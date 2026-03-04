@@ -136,6 +136,7 @@
       64738 # Mumble
       5222  # XMPP (Prosody)
       5280  # XMPP HTTP (BOSH/WebSocket)
+      9090  # Linkding
     ];
    allowedUDPPorts = [
       53    # Adguard
